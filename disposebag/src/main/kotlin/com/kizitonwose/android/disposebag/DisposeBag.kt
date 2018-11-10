@@ -33,6 +33,12 @@ class DisposeBag @JvmOverloads constructor(owner: LifecycleOwner,
 
     private val composite by lazy { CompositeDisposable() }
 
+    public val size = composite.size()
+
+    public fun clear() {
+        composite.clear()
+    }
+
     init {
         lifecycle.addObserver(this)
     }
