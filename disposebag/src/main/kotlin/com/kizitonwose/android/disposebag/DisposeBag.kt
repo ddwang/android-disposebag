@@ -29,15 +29,13 @@ class DisposeBag @JvmOverloads constructor(owner: LifecycleOwner,
         resources.forEach { composite.add(it) }
     }
 
+    private val TAG = this::class.java.simpleName
+
     private val lifecycle = owner.lifecycle
 
     private val composite by lazy { CompositeDisposable() }
 
     public val size = composite.size()
-
-    public fun clear() {
-        composite.clear()
-    }
 
     init {
         lifecycle.addObserver(this)
@@ -57,6 +55,8 @@ class DisposeBag @JvmOverloads constructor(owner: LifecycleOwner,
     override fun delete(d: Disposable) = composite.delete(d)
 
     override fun onPause(owner: LifecycleOwner) {
+        composite.clear()
+
         if (event == Lifecycle.Event.ON_PAUSE) dispose()
     }
 
