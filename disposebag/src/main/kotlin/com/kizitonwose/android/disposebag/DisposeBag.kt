@@ -3,6 +3,7 @@ package com.kizitonwose.android.disposebag
 import android.arch.lifecycle.DefaultLifecycleObserver
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
+import android.util.Log
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.internal.disposables.DisposableContainer
@@ -55,16 +56,21 @@ class DisposeBag @JvmOverloads constructor(owner: LifecycleOwner,
     override fun delete(d: Disposable) = composite.delete(d)
 
     override fun onPause(owner: LifecycleOwner) {
+        Log.d(TAG, "onPause, composite={isDisposed: " + composite.isDisposed + ", size: " + composite.size() + "}")
         composite.clear()
 
         if (event == Lifecycle.Event.ON_PAUSE) dispose()
     }
 
     override fun onStop(owner: LifecycleOwner) {
+        Log.d(TAG, "onStop, composite={isDisposed: " + composite.isDisposed + ", size: " + composite.size() + "}")
+
         if (event == Lifecycle.Event.ON_STOP) dispose()
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
+        Log.d(TAG, "onDestroy, composite={isDisposed: " + composite.isDisposed + ", size: " + composite.size() + "}")
+
         if (event == Lifecycle.Event.ON_DESTROY) dispose()
     }
 }
