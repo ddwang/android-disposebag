@@ -57,13 +57,13 @@ class DisposeBag @JvmOverloads constructor(owner: LifecycleOwner,
 
     override fun onPause(owner: LifecycleOwner) {
         Log.d(TAG, "onPause, composite={isDisposed: " + composite.isDisposed + ", size: " + composite.size() + "}")
-        composite.clear()
 
         if (event == Lifecycle.Event.ON_PAUSE) dispose()
     }
 
     override fun onStop(owner: LifecycleOwner) {
         Log.d(TAG, "onStop, composite={isDisposed: " + composite.isDisposed + ", size: " + composite.size() + "}")
+        composite.clear()
 
         if (event == Lifecycle.Event.ON_STOP) dispose()
     }
