@@ -42,6 +42,8 @@ class DisposeBag @JvmOverloads constructor(owner: LifecycleOwner,
 
     fun size() = composite.size()
 
+    fun clear() = composite.clear()
+
     override fun isDisposed() = composite.isDisposed
 
     override fun dispose() {
